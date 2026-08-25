@@ -3247,7 +3247,7 @@ ul {
 }
 
 .home-hero-section {
-  background-image: linear-gradient(to bottom, var(--color--black-600), var(--color--black-600)), url("./img/wide.png");
+  background-image: linear-gradient(to bottom, var(--color--black-600), var(--color--black-600)), url("https://cdn.prod.website-files.com/686e62a007378b7db527c425/6874b59d364ee01bae87a0a7_hero-home-bg.webp");
   background-position: 0 0, 50% 0;
   background-size: auto, cover;
   justify-content: space-between;
@@ -4030,7 +4030,7 @@ ul {
 }
 
 .daily-menu-wrapper {
-  margin-top: 50px;
+  margin-top: 150px;
 }
 
 .daily-menu-card {
@@ -4132,7 +4132,7 @@ ul {
 }
 
 .daily-menu-image {
-  width: 75%;
+  width: 85%;
 }
 
 .location-grid {
@@ -5094,8 +5094,8 @@ ul {
 }
 
 .menu-hero-section {
-  background-color: var(--color--brown);
-  padding-top: 200px;
+  background-color: #99161B;
+  padding-top: 120px;
   padding-bottom: 40px;
 }
 
@@ -6954,9 +6954,7 @@ ul {
     margin-bottom: 2px;
   }
 
-  .menu-hero-section {
-    padding-top: 100px;
-  }
+p
 
   .menu-grid {
     grid-template-rows: auto auto;
