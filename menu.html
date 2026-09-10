@@ -8,6 +8,84 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <style>
+
+
+
+
+    /* Dark theme base */
+.section { background-color: #0a0a0a; }
+.h2-heading { color: #eaeaea; }
+
+/* 4-column grid instead of 2 */
+.menu-collection-item { width: 25%; }
+@media (max-width: 991px) { .menu-collection-item { width: 50%; } }
+@media (max-width: 767px) { .menu-collection-item { width: 100%; } }
+
+/* Vertical card: image on top, full width */
+.menu-card {
+  flex-direction: column;
+  align-items: stretch;
+  background: #99161B  ;
+  border-color: #262626;
+}
+.slider-menu-image-div { width: 100%; height: 160px; }
+
+/* Gold accents instead of red */
+.menu-card-content .h5-heading { color: #d4a94a; }
+.menu-paragraph { color: #b0b0b0; }
+.price-value { color: #d4a94a; font-weight: 700; }
+.price-label { color: #8a8a8a; }
+
+/* Text-tab style instead of pills */
+/* .menu-tabs-menu { background: none; gap: 24px; } */
+.menu-tab-link {
+  background: none;
+  color: #8a8a8a;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 4px 0;
+}
+.menu-tab-link.w--current {
+  color: #d4a94a;
+  border-bottom-color: #d4a94a;
+}
+
+
+/* .menu-card-content .h5-heading { color: #ffffff !important; } */
+.menu-paragraph { color: #e0e0e0 !important; }
+.price-label { color: #d0d0d0 !important; }
+.price-value { color: #ffffff !important; font-weight: 700; }
+.h2-heading { color: #ffffff !important; }
+
+
+
+
+
+.header.w-nav {
+  background-color: #99161b !important;
+}
+/* REMOVE this too */
+.logo {
+  filter: brightness(0) invert(1) !important;
+}
+/* Clip the top banner's content instead of letting it overflow once its height collapses to 0 */
+.header-top-banner-div {
+  overflow: hidden !important;
+}
+
+@media (min-width: 992px) {
+  .nav-link {
+    color: #ffffff !important;
+  }
+}
+
+.large-text {
+  color: #ffffff !important;
+}
+
+
+
+
     .wf-force-outline-none[tabindex="-1"]:focus {
       outline: none;
     }
@@ -258,23 +336,32 @@
 
   </section>
 
-  <style>
-    .menu-card {
+<style>
+  /* ===== Al Taza–style vertical card, no description ===== */
+
+.menu-collection-item {
+  width: 50%; /* 2 columns, same on mobile */
+  padding: 8px;
+}
+
+.menu-card {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  padding: 14px;
-  border: 1px solid var(--color--gray-200);
-  border-radius: 14px;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  background: #141414;
+  border: 1px solid #262626;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0;
+  gap: 0;
 }
 
 .slider-menu-image-div {
-  flex: none;
-  width: 120px;
-  height: 120px;
-  border-radius: 12px;
+  width: 100%;
+  height: 180px;
   overflow: hidden;
+  flex: none;
 }
 
 .slider-menu-image {
@@ -285,129 +372,142 @@
 
 .menu-card-content {
   flex: 1;
-  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  padding: 14px;
 }
 
-.menu-card-top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
+.menu-card-content .h5-heading {
+  color: #d4a94a;
+  font-size: 16px;
+  font-weight: 700;
 }
 
-.menu-collection-item {
-  width: 50%;
+/* Hide description entirely */
+.menu-card-content .menu-paragraph {
+  display: none;
 }
 
-@media (max-width: 767px) {
-  .menu-collection-item {
-    width: 100%;
-  }
-
-  .menu-card {
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px;
-    border-radius: 12px;
-  }
-
-  .slider-menu-image-div {
-    width: 72px;
-    height: 72px;
-    border-radius: 10px;
-  }
-
-  .menu-card-content {
-    gap: 2px;
-  }
-
-  /* shrink the veg/non-veg tag */
-  .daily-menu-veg-non-veg-div img {
-    width: 12px;
-    height: 12px;
-  }
-  .daily-menu-veg-non-veg-div .menu-category-text {
-    font-size: 11px;
-  }
-
-  /* tighter title */
-  .menu-card-content .h5-heading {
-    font-size: 15px;
-    line-height: 120%;
-  }
-
-  /* shorter description, clamp to 2 lines */
-  .menu-card-content .menu-paragraph {
-    font-size: 12px;
-    line-height: 140%;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .menu-card-top-row {
-    flex-wrap: wrap;
-  }
-  .menu-card-top-row .large-text {
-    font-size: 13px;
-  }
-
-  /* price row: no wrapping mid-group, just shrink to fit */
-  .menu-card-price-row {
-    flex-wrap: wrap;
-    row-gap: 4px;
-    column-gap: 10px;
-  }
-  .price-option {
-    white-space: nowrap;
-  }
-  .price-option:not(:last-child)::after {
-    margin-left: 10px;
-    height: 10px;
-  }
-  .price-label,
-  .price-value {
-    font-size: 12px !important;
-  }
-}
 .menu-card-price-row {
+  margin-top: auto;
+  padding-top: 8px;
   display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 8px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
 }
 
 .price-option {
   display: flex;
   align-items: baseline;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .price-option:not(:last-child)::after {
   content: "";
   width: 1px;
-  height: 12px;
-  background: var(--color--gray-400);
-  margin-left: 14px;
+  height: 10px;
+  background: #444;
+  margin-left: 12px;
   display: inline-block;
 }
 
 .price-label {
-  font-size: 14px;
-  color: var(--color--gray-700);
-  font-weight: 500;
+  font-size: 12px;
+  color: #b0b0b0;
+  font-weight: 400;
 }
 
 .price-value {
-  font-size: 14px;
-  /* font-weight: 700; */
-  color: var(--color--red);
+  color: #d4a94a ;
+  font-weight: 400 !important;
+  font-size: 13px !important;
 }
-  </style>
+
+/* Tighten on small phones */
+@media (max-width: 480px) {
+  .slider-menu-image-div { height: 140px; }
+  .menu-card-content { padding: 10px; gap: 4px; }
+  .menu-card-content .h5-heading { font-size: 14px; }
+  .menu-card-price-row { gap: 4px 8px; }
+  .price-option:not(:last-child)::after { margin-left: 8px; }
+  .price-label { font-size: 11px; }
+  .price-value { font-size: 12px; }
+}
+
+/* Extra-narrow phones: let price labels drop to a second line if needed */
+@media (max-width: 360px) {
+  .price-value { font-size: 11.5px; }
+  .price-label { font-size: 10.5px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Full redesign: individual category chips (no big pill container) ===== */
+
+.menu-tab-wrapper.w-tabs {
+  margin-bottom: 24px;
+}
+
+.menu-tabs-menu.w-tab-menu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible;
+}
+
+.menu-tab-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #141414 !important;
+  border: 1px solid #2a2a2a !important;
+  border-radius: 10px !important;
+  padding: 12px 8px !important;
+  color: #b0b0b0 !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+}
+
+.menu-tab-link div {
+  pointer-events: none;
+}
+
+.menu-tab-link:hover {
+  border-color: #d4a94a !important;
+  color: #d4a94a !important;
+}
+
+.menu-tab-link.w--current {
+  background: #99161B !important;
+  border-color: #99161B !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 380px) {
+  .menu-tabs-menu.w-tab-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+</style>
   
   <section class="section">
     <div class="w-layout-blockcontainer container w-container">
@@ -416,6 +516,14 @@
           style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1; filter: blur(0px);"
           class="h2-heading">Explore our menu</h2>
       </div>
+      <div class="menu-search-div" style="margin: 20px 0; text-align: center;">
+  <input
+    type="text"
+    id="menu-search-input"
+    placeholder="Search menu..."
+    style="width: 100%; max-width: 400px; padding: 10px 16px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px;"
+  >
+</div>
       <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100"
         class="menu-tab-wrapper w-tabs">
         <div data-w-id="57213a5b-66e5-1747-3987-62c3917b879d"
@@ -438,6 +546,14 @@
             aria-controls="w-tabs-0-data-w-pane-3" aria-selected="false" tabindex="-1">
             <div>Shawaya</div>
           </a><a data-w-tab="Tab 5" class="menu-tab-link w-inline-block w-tab-link" id="w-tabs-0-data-w-tab-4"
+  href="#w-tabs-0-data-w-pane-4" role="tab"
+  aria-controls="w-tabs-0-data-w-pane-4" aria-selected="false" tabindex="-1">
+  <div>Drinks</div>
+</a><a data-w-tab="Tab 5" class="menu-tab-link w-inline-block w-tab-link" id="w-tabs-0-data-w-tab-4"
+  href="#w-tabs-0-data-w-pane-4" role="tab"
+  aria-controls="w-tabs-0-data-w-pane-4" aria-selected="false" tabindex="-1">
+  <div>Drinks</div>
+</a><a data-w-tab="Tab 5" class="menu-tab-link w-inline-block w-tab-link" id="w-tabs-0-data-w-tab-4"
   href="#w-tabs-0-data-w-pane-4" role="tab"
   aria-controls="w-tabs-0-data-w-pane-4" aria-selected="false" tabindex="-1">
   <div>Drinks</div>
@@ -634,23 +750,87 @@
             aria-labelledby="w-tabs-0-data-w-tab-1" style="">
             <div class="w-dyn-list">
               <div role="list" class="w-dyn-items w-row">
-                <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
-                  <div class="menu-card">
-                    <div class="slider-menu-image-div">
-                      <img src="./index_files/img/mandi.jpeg" class="slider-menu-image" alt="Chicken Mandi">
-                    </div>
-                    <div class="menu-card-content">
-                
-                      <div class="h5-heading">Chicken Mandi</div>
-                      <p class="small-paragraph menu-paragraph">Slow-cooked chicken over spiced basmati rice with mandi masala.</p>
-                      <div class="menu-card-price-row">
-                        <div class="price-option"><span class="price-label">Qtr</span><span class="price-value">₹&nbsp;190</span></div>
-                        <div class="price-option"><span class="price-label">Half</span><span class="price-value">₹&nbsp;380</span></div>
-                        <div class="price-option"><span class="price-label">Full</span><span class="price-value">₹&nbsp;720</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+<style>
+.mandi-subheading {
+  width: 100%;
+  color: #d4a94a;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 20px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #262626;
+}
+.mandi-subheading:first-child { margin-top: 0; }
+</style>
+
+<div role="listitem" class="mandi-subheading">Chicken Mandi</div>
+
+<div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
+  <div class="menu-card">
+    <div class="slider-menu-image-div">
+      <img src="./index_files/img/mandi.jpeg" class="slider-menu-image" alt="Chicken Mandi">
+    </div>
+    <div class="menu-card-content">
+      <div class="h5-heading">Regular</div>
+      <div class="menu-card-price-row">
+        <div class="price-option"><span class="price-label">Qtr</span><span class="price-value">₹&nbsp;190</span></div>
+        <div class="price-option"><span class="price-label">Half</span><span class="price-value">₹&nbsp;380</span></div>
+        <div class="price-option"><span class="price-label">Full</span><span class="price-value">₹&nbsp;720</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
+  <div class="menu-card">
+    <div class="slider-menu-image-div">
+      <img src="./index_files/img/bellari.png" class="slider-menu-image" alt="Chicken Bellari Mandi">
+    </div>
+    <div class="menu-card-content">
+      <div class="h5-heading">Bellari</div>
+      <div class="menu-card-price-row">
+        <div class="price-option"><span class="price-label">Qtr</span><span class="price-value">₹&nbsp;190</span></div>
+        <div class="price-option"><span class="price-label">Half</span><span class="price-value">₹&nbsp;380</span></div>
+        <div class="price-option"><span class="price-label">Full</span><span class="price-value">₹&nbsp;720</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div role="listitem" class="mandi-subheading">Chicken Mandi</div>
+
+<div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
+  <div class="menu-card">
+    <div class="slider-menu-image-div">
+      <img src="./index_files/img/mandi.jpeg" class="slider-menu-image" alt="Chicken Mandi">
+    </div>
+    <div class="menu-card-content">
+      <div class="h5-heading">Regular</div>
+      <div class="menu-card-price-row">
+        <div class="price-option"><span class="price-label">Qtr</span><span class="price-value">₹&nbsp;190</span></div>
+        <div class="price-option"><span class="price-label">Half</span><span class="price-value">₹&nbsp;380</span></div>
+        <div class="price-option"><span class="price-label">Full</span><span class="price-value">₹&nbsp;720</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
+  <div class="menu-card">
+    <div class="slider-menu-image-div">
+      <img src="./index_files/img/bellari.png" class="slider-menu-image" alt="Chicken Bellari Mandi">
+    </div>
+    <div class="menu-card-content">
+      <div class="h5-heading">Bellari</div>
+      <div class="menu-card-price-row">
+        <div class="price-option"><span class="price-label">Qtr</span><span class="price-value">₹&nbsp;190</span></div>
+        <div class="price-option"><span class="price-label">Half</span><span class="price-value">₹&nbsp;380</span></div>
+        <div class="price-option"><span class="price-label">Full</span><span class="price-value">₹&nbsp;720</span></div>
+      </div>
+    </div>
+  </div>
+</div>
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
                     <div class="slider-menu-image-div">
@@ -1043,6 +1223,34 @@
         title="Widget containing a Cloudflare security challenge" tabindex="-1" aria-hidden="true"
         style="border-width: medium; border-style: none; border-color: currentcolor; border-image: none; overflow: hidden; width: 1px; height: 1px; position: fixed; visibility: visible; opacity: 0.01; left: 0px; top: 0px; pointer-events: none; z-index: -1;"></iframe></template>
   </div>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  var input = document.getElementById('menu-search-input');
+  if (!input) return;
+
+  var allTabLink = document.getElementById('w-tabs-0-data-w-tab-0'); // "All" tab
+  var allPane = document.getElementById('w-tabs-0-data-w-pane-0');   // "All" pane
+
+  input.addEventListener('input', function () {
+    var query = input.value.trim().toLowerCase();
+
+    // If there's a search query and "All" isn't already active, switch to it
+    if (query !== '' && allTabLink && !allTabLink.classList.contains('w--current')) {
+      allTabLink.click();
+    }
+
+    if (!allPane) return;
+
+    var items = allPane.querySelectorAll('.menu-collection-item');
+    items.forEach(function (item) {
+      var title = item.querySelector('.h5-heading');
+      var desc = item.querySelector('.menu-paragraph');
+      var text = ((title ? title.textContent : '') + ' ' + (desc ? desc.textContent : '')).toLowerCase();
+      item.style.display = (query === '' || text.indexOf(query) !== -1) ? '' : 'none';
+    });
+  });
+});
+</script>
 </body>
 
 </html>
