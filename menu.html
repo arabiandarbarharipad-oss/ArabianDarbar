@@ -1423,6 +1423,7 @@
      aria-labelledby="w-tabs-0-data-w-tab-4">
 
   <div class="w-dyn-list">
+    <div id="drinks-subfilter-bar"></div>
     <div role="list" class="w-dyn-items w-row">
 
       <!-- ==================== SHAKES ==================== -->
@@ -2686,6 +2687,65 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+</script>
+
+
+<script>
+  (function () {
+  var pane = document.getElementById('w-tabs-0-data-w-pane-4');
+  var bar = document.getElementById('drinks-subfilter-bar');
+  if (!pane || !bar) return;
+
+  bar.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 24px 0;';
+
+  var subheadings = pane.querySelectorAll('.mandi-subheading');
+  var groups = [];
+
+  subheadings.forEach(function (sh, idx) {
+    sh.setAttribute('data-drink-group', idx);
+    var el = sh.nextElementSibling;
+    while (el && !el.classList.contains('mandi-subheading')) {
+      el.setAttribute('data-drink-group', idx);
+      el = el.nextElementSibling;
+    }
+    groups.push({ idx: idx, label: sh.textContent.trim() });
+  });
+
+  function styleBtn(btn, active) {
+    btn.style.background = active ? '#99161B' : '#141414';
+    btn.style.color = active ? '#fff' : '#b0b0b0';
+    btn.style.border = '1px solid ' + (active ? '#99161B' : '#2a2a2a');
+  }
+
+function setActive(group) {
+  bar.querySelectorAll('button').forEach(function (b) {
+    styleBtn(b, b.getAttribute('data-group') === String(group));
+  });
+  pane.querySelectorAll('[data-drink-group]').forEach(function (item) {
+    var show = group === 'all' || item.getAttribute('data-drink-group') === String(group);
+    item.style.setProperty('display', show ? '' : 'none', show ? '' : 'important');
+  });
+}
+
+  var allBtn = document.createElement('button');
+  allBtn.textContent = 'All';
+  allBtn.setAttribute('data-group', 'all');
+  bar.appendChild(allBtn);
+
+  groups.forEach(function (g) {
+    var btn = document.createElement('button');
+    btn.textContent = g.label;
+    btn.setAttribute('data-group', g.idx);
+    bar.appendChild(btn);
+  });
+
+  bar.querySelectorAll('button').forEach(function (btn) {
+    btn.style.cssText += 'padding:8px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;';
+    btn.addEventListener('click', function () { setActive(btn.getAttribute('data-group')); });
+  });
+
+  setActive('all');
+})();
 </script>
 </body>
 
