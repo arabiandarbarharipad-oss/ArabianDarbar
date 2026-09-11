@@ -2687,6 +2687,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  var tabLinks = document.querySelectorAll('.menu-tab-link');
+
+  tabLinks.forEach(function (link) {
+    link.addEventListener('touchend', function (e) {
+      e.preventDefault(); // stop the "ghost click" / double-tap delay
+      link.click();       // fire Webflow's normal tab-switch logic immediately
+    }, { passive: false });
+  });
+});
 </script>
 
 
@@ -2746,6 +2757,8 @@ function setActive(group) {
 
   setActive('all');
 })();
+
+
 </script>
 </body>
 
