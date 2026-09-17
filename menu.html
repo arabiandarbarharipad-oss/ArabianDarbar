@@ -384,6 +384,48 @@
   </section>
 
   <style>
+@media (min-width: 992px) {
+  .menu-card {
+    position: relative !important;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    will-change: transform !important;
+    cursor: pointer !important;
+  }
+
+  .menu-card::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: inherit !important;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid #d4a94a !important;
+    opacity: 0 !important;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    pointer-events: none !important;
+  }
+
+  .menu-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+  }
+
+  .menu-card:hover::after {
+    opacity: 1 !important;
+  }
+
+  .slider-menu-image {
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    will-change: transform !important;
+  }
+
+  .menu-card:hover .slider-menu-image {
+    transform: scale(1.08) !important;
+  }
+}
+
+
+  </style>
+
+  <style>
     /* ===== Al Taza–style vertical card, no description ===== */
 
     .menu-collection-item {
@@ -548,6 +590,57 @@
       }
     }
 
+    /* ===== Desktop/laptop screens: more columns per row ===== */
+    @media (min-width: 992px) and (max-width: 1199px) {
+      .menu-collection-item {
+        width: 33.333% !important;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .menu-collection-item {
+        width: 20% !important;
+        
+      }
+
+      .slider-menu-image-div {
+        height: 250px;
+      }
+
+      .menu-card-content {
+        padding: 12px;
+      }
+
+      .menu-card-content .h5-heading {
+        font-size: 17px;
+      }
+
+      .price-label {
+        font-size: 13px;
+      }
+
+      .price-value {
+        font-size: 14px !important;
+      }
+
+          .menu-tabs-content .mandi-subheading,
+    .w-dyn-items .mandi-subheading{
+      padding-top: 24px !important;
+      margin-left: 1rem !important;
+    }
+
+      .menu-tabs-menu.w-tab-menu {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .menu-tab-link {
+    flex: 1 1 0;
+    min-width: 140px;
+  }
+    }
+
 
 
 
@@ -694,7 +787,7 @@
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
                     <div class="slider-menu-image-div">
-                      <img src="./index_files/img/bellari.png" class="slider-menu-image" alt="Chicken Mandi">
+                      <img src="./index_files/img/food/bellari -mandi.png" class="slider-menu-image" alt="Chicken Mandi">
                     </div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Chicken Bellari Mandi</div>
@@ -730,7 +823,7 @@
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
                     <div class="slider-menu-image-div">
-                      <img src="./index_files/img/Masala-shawaya.png" class="slider-menu-image" alt="Masala Shawaya">
+                      <img src="./index_files/img/food/masalas-shawaya.jpeg" class="slider-menu-image" alt="Masala Shawaya">
                     </div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Masala Shawaya</div>
@@ -843,7 +936,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/mandi.jpeg" class="slider-menu-image"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/normal-mandi.jpeg" class="slider-menu-image"
                         alt="Chicken Mandi"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Chicken Mandi</div>
@@ -897,7 +990,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/mandi.jpeg" class="slider-menu-image"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/Spicy chicken mandhi.jpeg" class="slider-menu-image"
                         alt="Spicy Creamy Mandi"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Spicy Creamy Mandi</div>
@@ -917,7 +1010,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/food/ribs.jpeg"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/Beef mandi.jpeg"
                         class="slider-menu-image" alt="Beef Ribs Mandi"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Beef Mandi</div>
@@ -972,7 +1065,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/placeholder.png"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/Normal alafham.jpeg"
                         class="slider-menu-image" alt="Alfahm+Rice"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Alfahm + Rice</div>
@@ -990,7 +1083,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/placeholder.png"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/Peri peri alfham mandi.jpeg"
                         class="slider-menu-image" alt="Peri Peri Alfahm+Rice"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Peri Peri Alfahm + Rice</div>
@@ -1044,7 +1137,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/placeholder.png"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/Mexican alfham mandi.jpeg"
                         class="slider-menu-image" alt="Mexican Alfahm+Rice"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Mexican Alfahm + Rice</div>
@@ -1082,7 +1175,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/mandi.jpeg" class="slider-menu-image"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/Shawaya mandi.jpeg" class="slider-menu-image"
                         alt="Shawaya Mandi"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Shawaya Mandi</div>
@@ -1600,7 +1693,7 @@
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
                     <div class="slider-menu-image-div">
-                      <img src="./index_files/img/Masala-shawaya.png" class="slider-menu-image" alt="Masala Shawaya">
+                      <img src="./index_files/img/food/masalas-shawaya.jpeg" class="slider-menu-image" alt="Masala Shawaya">
                     </div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Masala Shawaya</div>
