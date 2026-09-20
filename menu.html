@@ -768,10 +768,16 @@
     }
 
 @media (hover: hover) and (pointer: fine) {
-  .menu-tab-link:not(.w--current):hover {
+  .menu-tab-link:not(.is-active):hover {
     border-color: #d4a94a !important;
     color: #d4a94a !important;
   }
+}
+
+.menu-tab-link.is-active {
+  background: #99161B !important;
+  border-color: #99161B !important;
+  color: #ffffff !important;
 }
 
     .menu-tab-link.w--current {
@@ -822,7 +828,7 @@
             href="#w-tabs-0-data-w-pane-2" role="tab" aria-controls="w-tabs-0-data-w-pane-2" aria-selected="false"
             tabindex="-1">
             <div>Shawarma</div>
-          </a><a data-w-tab="Tab 4" class="menu-tab-link w-inline-block w-tab-link w--current"
+          </a><a data-w-tab="Tab 4" class="menu-tab-link w-inline-block w-tab-link"
             id="w-tabs-0-data-w-tab-3" href="#w-tabs-0-data-w-pane-3" role="tab" aria-controls="w-tabs-0-data-w-pane-3"
             aria-selected="false" tabindex="-1">
             <div>Shawaya</div>
@@ -3110,12 +3116,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function show(link) {
     var id = link.getAttribute('aria-controls');
-    links.forEach(function (l) {
-      var on = (l === link);
-      l.classList.toggle('w--current', on);
-      l.setAttribute('aria-selected', on ? 'true' : 'false');
-      l.setAttribute('tabindex', on ? '0' : '-1');
-    });
+      links.forEach(function (l) {
+        var on = (l === link);
+        l.classList.toggle('w--current', on);
+        l.classList.toggle('is-active', on);   // <-- add this line
+        l.setAttribute('aria-selected', on ? 'true' : 'false');
+        l.setAttribute('tabindex', on ? '0' : '-1');
+      });
     panes.forEach(function (p) {
       p.classList.toggle('w--tab-active', p.id === id);
     });
