@@ -780,11 +780,7 @@
   color: #ffffff !important;
 }
 
-    .menu-tab-link.w--current {
-      background: #99161B !important;
-      border-color: #99161B !important;
-      color: #ffffff !important;
-    }
+
 
     @media (max-width: 380px) {
       .menu-tabs-menu.w-tab-menu {
@@ -3118,8 +3114,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var id = link.getAttribute('aria-controls');
       links.forEach(function (l) {
         var on = (l === link);
-        l.classList.toggle('w--current', on);
-        l.classList.toggle('is-active', on);   // <-- add this line
+        l.classList.toggle('is-active', on);
+        l.classList.remove('w--current');
         l.setAttribute('aria-selected', on ? 'true' : 'false');
         l.setAttribute('tabindex', on ? '0' : '-1');
       });
@@ -3128,16 +3124,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Capture phase: runs before Webflow's own tab handler and blocks it
-  wrapper.addEventListener('click', function (e) {
-    var link = e.target.closest('.menu-tab-link');
-    if (!link) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    show(link);
-  }, true);
+function activate(e) {
+  var link = e.target.closest('.menu-tab-link');
+  if (!link) return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  show(link);
+}
 
-  show(links[0]); // start on "All"
+// touch/pen: react on finger-up, don't wait for a click that may never come
+wrapper.addEventListener('pointerup', function (e) {
+  if (e.pointerType === 'mouse') return;
+  activate(e);
+}, true);
+
+// mouse + keyboard
+wrapper.addEventListener('click', activate, true);
 });
 </script>
 </body>
