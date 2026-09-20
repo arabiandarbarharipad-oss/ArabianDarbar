@@ -186,15 +186,24 @@
 
   .media{ position: relative; }
 
-  .arch{
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    aspect-ratio: 5 / 6;
-    background: #050505;
-    border-radius:
-      calc(var(--cw) / 2 - 8px) calc(var(--cw) / 2 - 8px) 14px 14px;
-  }
+.arch{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);                                  /* NEW */
+  -webkit-mask-image: -webkit-radial-gradient(white, black); /* NEW */
+  mask-image: radial-gradient(white, black);                 /* NEW */
+  aspect-ratio: 5 / 6;
+  background: #050505;
+  border-radius:
+    calc(var(--cw) / 2 - 8px) calc(var(--cw) / 2 - 8px) 14px 14px;
+}
+
+.img-wrap,
+.arch img,
+.arch::after{
+  border-radius: inherit;
+}
 
   .img-wrap{
     position: absolute;
@@ -343,6 +352,9 @@
     overflow: hidden;
     pointer-events: none;
     background: var(--curtain);
+      isolation: isolate;
+    transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
   .curtain img{

@@ -758,17 +758,21 @@
       font-weight: 600;
       letter-spacing: 0.3px;
       text-transform: uppercase;
-      transition: all 0.25s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .menu-tab-link div {
       pointer-events: none;
     }
 
-    .menu-tab-link:hover {
-      border-color: #d4a94a !important;
-      color: #d4a94a !important;
-    }
+@media (hover: hover) and (pointer: fine) {
+  .menu-tab-link:not(.w--current):hover {
+    border-color: #d4a94a !important;
+    color: #d4a94a !important;
+  }
+}
 
     .menu-tab-link.w--current {
       background: #99161B !important;
@@ -3104,21 +3108,29 @@ document.addEventListener('DOMContentLoaded', function () {
   var links = wrapper.querySelectorAll('.menu-tab-link');
   var panes = wrapper.querySelectorAll('.w-tab-pane');
 
-  function sync() {
-    var active = wrapper.querySelector('.w-tab-pane.w--tab-active');
-    if (!active) return;
+  function show(link) {
+    var id = link.getAttribute('aria-controls');
     links.forEach(function (l) {
-      var isCurrent = l.getAttribute('aria-controls') === active.id;
-      if (l.classList.contains('w--current') !== isCurrent) {
-        l.classList.toggle('w--current', isCurrent);
-      }
+      var on = (l === link);
+      l.classList.toggle('w--current', on);
+      l.setAttribute('aria-selected', on ? 'true' : 'false');
+      l.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    panes.forEach(function (p) {
+      p.classList.toggle('w--tab-active', p.id === id);
     });
   }
 
-  var mo = new MutationObserver(sync);
-  panes.forEach(function (p) { mo.observe(p, { attributes: true, attributeFilter: ['class'] }); });
-  links.forEach(function (l) { mo.observe(l, { attributes: true, attributeFilter: ['class'] }); });
-  sync();
+  // Capture phase: runs before Webflow's own tab handler and blocks it
+  wrapper.addEventListener('click', function (e) {
+    var link = e.target.closest('.menu-tab-link');
+    if (!link) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    show(link);
+  }, true);
+
+  show(links[0]); // start on "All"
 });
 </script>
 </body>
