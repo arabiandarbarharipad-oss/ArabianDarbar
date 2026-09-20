@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#99161B">
+<title>Choose Outlet – Arabian Darbar</title>
+
+<link href="https://fonts.googleapis.com/" rel="preconnect">
+<link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --brand:      #99161B;   /* Darbar red – the page itself      */
+    --brand-deep: #5c0b0f;   /* flat offset shadow                */
+    --brand-line: #851217;   /* pattern lines, barely there       */
+    --cream:      #f6ecdc;
+    --ink:        #1a0708;
+    --ink-soft:   #6d5a55;
+    --curtain:    #0a0a0a;   /* colour the page fades to on click */
+
+    --pad: 20px;
+    --gap: 12px;
+
+    --ease-out:  cubic-bezier(.16, 1, .3, 1);
+    --ease-io:   cubic-bezier(.7, 0, .2, 1);
+    --ease-back: cubic-bezier(.34, 1.56, .64, 1);
+  }
+
+  *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body{ margin: 0; min-height: 100%; }
+
+  body{
+    background: var(--brand);
+    color: var(--cream);
+    font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:
+      calc(32px + env(safe-area-inset-top, 0px))
+      calc(var(--pad) + env(safe-area-inset-right, 0px))
+      calc(28px + env(safe-area-inset-bottom, 0px))
+      calc(var(--pad) + env(safe-area-inset-left, 0px));
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ------------------------------------------------------------
+     Background: flat eight-point star lattice, drifting slowly.
+     Oversized + transform-only so the drift stays on the GPU.
+  ------------------------------------------------------------ */
+  .pattern{
+    position: fixed;
+    inset: -64px;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23851217' stroke-width='1.2'%3E%3Crect x='14' y='14' width='36' height='36'/%3E%3Crect x='14' y='14' width='36' height='36' transform='rotate(45 32 32)'/%3E%3C/g%3E%3Cg fill='%23851217'%3E%3Ccircle cx='0' cy='0' r='2.2'/%3E%3Ccircle cx='64' cy='0' r='2.2'/%3E%3Ccircle cx='0' cy='64' r='2.2'/%3E%3Ccircle cx='64' cy='64' r='2.2'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 64px 64px;
+    animation:
+      patternIn 1.6s ease .1s backwards,
+      drift 60s linear infinite;
+  }
+
+  @keyframes patternIn{ from{ opacity: 0; } }
+  @keyframes drift{ to{ transform: translate3d(64px, 64px, 0); } }
+
+  .stage{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ------------------------------------------------------------
+     Header
+  ------------------------------------------------------------ */
+  .head{
+    text-align: center;
+    margin-bottom: 36px;
+    transition: opacity .35s ease, transform .35s ease;
+  }
+
+  .logo{
+    display: block;
+    height: 54px;
+    width: auto;
+    margin: 0 auto 18px;
+    filter: brightness(0) invert(1);
+    animation: drop .9s var(--ease-out) .15s backwards;
+  }
+
+  @keyframes drop{
+    from{ opacity: 0; transform: translateY(-16px) scale(.94); }
+  }
+
+  .title{
+    margin: 0;
+    font-family: 'Gloock', Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 9vw, 50px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  /* each line sits in a mask so the text slides up out of nothing */
+  .line{
+    display: block;
+    overflow: hidden;
+    padding-bottom: .14em;
+    margin-bottom: -.14em;
+  }
+
+  .line > span{
+    display: block;
+    animation: lineUp 1s var(--ease-out) backwards;
+  }
+
+  .line:nth-child(1) > span{ animation-delay: .35s; }
+  .line:nth-child(2) > span{ animation-delay: .5s; }
+
+  @keyframes lineUp{
+    from{ transform: translateY(115%); }
+  }
+
+  .sub{
+    margin: 14px 0 0;
+    font-size: 14px;
+    color: rgba(246, 236, 220, .8);
+    animation: fade .8s ease .85s backwards;
+  }
+
+  @keyframes fade{ from{ opacity: 0; } }
+
+  /* ------------------------------------------------------------
+     The two doorways
+  ------------------------------------------------------------ */
+  .cards{
+    --cw: min(300px, calc((100vw - 2 * var(--pad) - var(--gap) - 8px) / 2));
+    display: grid;
+    grid-template-columns: repeat(2, var(--cw));
+    gap: var(--gap);
+    justify-content: center;
+  }
+
+  .card{
+    --d: .8s;                       /* entrance delay */
+    position: relative;
+    display: block;
+    width: var(--cw);
+    padding: 8px 8px 18px;
+    background: var(--cream);
+    color: var(--ink);
+    text-decoration: none;
+    border-radius: calc(var(--cw) / 2) calc(var(--cw) / 2) 22px 22px;
+    box-shadow: 7px 7px 0 var(--brand-deep);
+    transition:
+      transform .35s var(--ease-out),
+      box-shadow .35s var(--ease-out),
+      opacity .4s ease;
+    animation: doorRise 1.1s var(--ease-out) var(--d) backwards;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .card:nth-child(2){ --d: .95s; }
+
+  /* rises from the floor like a door being pulled up */
+  @keyframes doorRise{
+    from{
+      clip-path: inset(100% -30px -30px -30px);
+      transform: translateY(36px);
+    }
+    to{
+      clip-path: inset(-30px);
+      transform: translateY(0);
+    }
+  }
+
+  .media{ position: relative; }
+
+  .arch{
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    aspect-ratio: 5 / 6;
+    background: #050505;
+    border-radius:
+      calc(var(--cw) / 2 - 8px) calc(var(--cw) / 2 - 8px) 14px 14px;
+  }
+
+  .img-wrap{
+    position: absolute;
+    inset: 0;
+    animation: imgSettle 1.8s var(--ease-out) calc(var(--d) + .1s) backwards;
+  }
+
+  @keyframes imgSettle{
+    from{ transform: scale(1.4); }
+  }
+
+  .arch img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate3d(calc(var(--px, 0) * -14px), calc(var(--py, 0) * -14px), 0) scale(1.02);
+    transition: transform .6s var(--ease-out);
+  }
+
+  /* brand tint that lifts on hover, so the food comes back to full colour */
+  .arch::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--brand);
+    mix-blend-mode: multiply;
+    opacity: .34;
+    transition: opacity .5s ease;
+  }
+
+  /* the knob on the door */
+  .go{
+    position: absolute;
+    left: calc(50% - 22px);
+    bottom: -22px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 4px solid var(--cream);
+    background: var(--brand);
+    color: var(--cream);
+    transition: background .3s ease, transform .4s var(--ease-out);
+    animation: pop .6s var(--ease-back) calc(var(--d) + .75s) backwards;
+  }
+
+  .go svg{ width: 16px; height: 16px; display: block; }
+
+  @keyframes pop{
+    from{ transform: scale(0); }
+  }
+
+  .info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 32px 6px 0;
+    text-align: center;
+    animation: fade .8s ease calc(var(--d) + .55s) backwards;
+  }
+
+  .place{
+    font-family: 'Gloock', Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: clamp(19px, 6vw, 30px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .area{
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    text-wrap: balance;
+  }
+
+  /* hover / focus / press */
+  .card:focus-visible{
+    outline: 3px solid var(--cream);
+    outline-offset: 6px;
+  }
+
+  @media (hover: hover){
+    .card:hover,
+    .card:focus-visible{
+      transform: translate(4px, 4px);
+      box-shadow: 3px 3px 0 var(--brand-deep);
+    }
+    .card:hover .arch img,
+    .card:focus-visible .arch img{
+      transform: translate3d(calc(var(--px, 0) * -14px), calc(var(--py, 0) * -14px), 0) scale(1.14);
+    }
+    .card:hover .arch::after,
+    .card:focus-visible .arch::after{ opacity: 0; }
+    .card:hover .go,
+    .card:focus-visible .go{
+      background: var(--ink);
+      transform: scale(1.1);
+    }
+    .card:hover .go svg,
+    .card:focus-visible .go svg{
+      animation: arrowThrough .55s var(--ease-out);
+    }
+  }
+
+  @keyframes arrowThrough{
+    0%   { transform: translateX(0); opacity: 1; }
+    45%  { transform: translateX(24px); opacity: 0; }
+    46%  { transform: translateX(-24px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+
+  @media (hover: none){
+    .arch::after{ opacity: .18; }
+  }
+
+  .card:active{
+    transform: translate(6px, 6px);
+    box-shadow: 1px 1px 0 var(--brand-deep);
+  }
+  .card:active .arch::after{ opacity: 0; }
+
+  /* ------------------------------------------------------------
+     Footer
+  ------------------------------------------------------------ */
+  .foot{
+    margin: 38px 0 0;
+    font-size: 12.5px;
+    text-align: center;
+    color: rgba(246, 236, 220, .75);
+    transition: opacity .35s ease, transform .35s ease;
+    animation: fade .9s ease 1.7s backwards;
+  }
+
+  /* ------------------------------------------------------------
+     Click-through: the chosen arch grows to fill the screen
+  ------------------------------------------------------------ */
+  .curtain{
+    position: fixed;
+    z-index: 50;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--curtain);
+  }
+
+  .curtain img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .curtain .veil{
+    position: absolute;
+    inset: 0;
+    background: var(--curtain);
+    opacity: 0;
+  }
+
+  body.leaving .head,
+  body.leaving .foot{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  body.leaving .card:not(.is-chosen){
+    opacity: 0;
+    transform: scale(.94) translateY(12px);
+  }
+
+  /* ------------------------------------------------------------
+     Larger screens
+  ------------------------------------------------------------ */
+  @media (min-width: 720px){
+    :root{ --gap: 32px; }
+
+    .cards{ --cw: 320px; }
+    .card{ padding: 10px 10px 20px; box-shadow: 9px 9px 0 var(--brand-deep); }
+    .arch{
+      aspect-ratio: 1 / 1.05;
+      border-radius:
+        calc(var(--cw) / 2 - 10px) calc(var(--cw) / 2 - 10px) 16px 16px;
+    }
+    .place{ font-size: 32px; }
+    .area{ font-size: 13.5px; }
+    .head{ margin-bottom: 44px; }
+    .logo{ height: 60px; }
+    .sub{ font-size: 15px; }
+
+    /* one line on wide screens */
+    .title{
+      display: flex;
+      justify-content: center;
+      gap: .28em;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation: none !important;
+      transition-duration: .01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="pattern" aria-hidden="true"></div>
+
+  <main class="stage">
+
+    <header class="head">
+      <img class="logo" src="./index_files/img/logo.png" alt="Arabian Darbar">
+      <h1 class="title">
+        <span class="line"><span>Where are you</span></span>
+        <span class="line"><span>dining today?</span></span>
+      </h1>
+      <p class="sub">Choose your outlet to open its menu.</p>
+    </header>
+
+    <nav class="cards" aria-label="Outlets">
+
+      <a class="card" href="./menu.html">
+        <div class="media">
+          <div class="arch">
+            <div class="img-wrap">
+              <img src="./index_files/img/outdoor.png" alt="" decoding="async">
+            </div>
+          </div>
+          <span class="go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+        <div class="info">
+          <span class="place">Haripad</span>
+          <span class="area">Near MLAL Cineplexx</span>
+        </div>
+      </a>
+
+      <a class="card" href="./menu_kylm.html">
+        <div class="media">
+          <div class="arch">
+            <div class="img-wrap">
+              <img src="./index_files/img/arab-kylm.png" alt="" decoding="async">
+            </div>
+          </div>
+          <span class="go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+        <div class="info">
+          <span class="place">Kayamkulam</span>
+          <span class="area">Near City Hospital </span>
+        </div>
+      </a>
+
+    </nav>
+
+    <p class="foot">Same taste. Two places.</p>
+
+  </main>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var leaving = false;
+
+  /* Warm up the menu page as soon as someone shows intent */
+  cards.forEach(function (card) {
+    var done = false;
+    function warm() {
+      if (done) return;
+      done = true;
+      var l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = card.href;
+      document.head.appendChild(l);
+    }
+    ['pointerenter', 'focus', 'touchstart'].forEach(function (ev) {
+      card.addEventListener(ev, warm, { passive: true });
+    });
+  });
+
+  /* Photo drifts against the cursor inside the arch (desktop only) */
+  if (finePointer.matches && !reduce.matches) {
+    cards.forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+        card.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--px', 0);
+        card.style.setProperty('--py', 0);
+      });
+    });
+  }
+
+  /* Chosen arch grows to fill the screen, then the menu opens */
+  function open(card) {
+    if (leaving) return;
+    leaving = true;
+
+    var href = card.href;
+    var arch = card.querySelector('.arch');
+    var img = card.querySelector('img');
+    var r = arch.getBoundingClientRect();
+    var rad = r.width / 2;
+
+    var from = {
+      top: r.top + 'px',
+      left: r.left + 'px',
+      width: r.width + 'px',
+      height: r.height + 'px',
+      borderRadius: rad + 'px ' + rad + 'px 14px 14px'
+    };
+    var to = {
+      top: '0px',
+      left: '0px',
+      width: document.documentElement.clientWidth + 'px',
+      height: window.innerHeight + 'px',
+      borderRadius: '0px 0px 0px 0px'
+    };
+
+    var curtain = document.createElement('div');
+    curtain.className = 'curtain';
+    Object.keys(from).forEach(function (k) { curtain.style[k] = from[k]; });
+
+    var clone = img.cloneNode();
+    clone.className = '';
+    clone.removeAttribute('style');
+    clone.setAttribute('aria-hidden', 'true');
+
+    var veil = document.createElement('span');
+    veil.className = 'veil';
+
+    curtain.appendChild(clone);
+    curtain.appendChild(veil);
+    document.body.appendChild(curtain);
+
+    card.classList.add('is-chosen');
+    document.body.classList.add('leaving');
+
+    var grow = curtain.animate([from, to], {
+      duration: 720,
+      easing: 'cubic-bezier(.7, 0, .2, 1)',
+      fill: 'forwards'
+    });
+    veil.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: 380,
+      delay: 380,
+      easing: 'ease-in',
+      fill: 'forwards'
+    });
+
+    var went = false;
+    function go() { if (went) return; went = true; window.location.href = href; }
+    grow.onfinish = go;
+    setTimeout(go, 1400); /* safety net */
+  }
+
+  cards.forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (reduce.matches || !card.querySelector('.arch').animate) return;
+      e.preventDefault();
+      open(card);
+    });
+  });
+
+  /* Back button restores the page from cache – clean up the curtain */
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    leaving = false;
+    document.body.classList.remove('leaving');
+    cards.forEach(function (c) { c.classList.remove('is-chosen'); });
+    var stale = document.querySelectorAll('.curtain');
+    Array.prototype.forEach.call(stale, function (n) { n.remove(); });
+  });
+})();
+</script>
+
+</body>
+</html>

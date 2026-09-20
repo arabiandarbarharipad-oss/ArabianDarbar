@@ -7,6 +7,76 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<style>
+
+.menu-tabs-content .main-category-heading,
+.w-dyn-items .main-category-heading {
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  clear: both !important;
+  float: none !important;
+  display: block !important;
+  text-align: left;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0 !important;
+  padding: 56px 0 12px 0 !important;
+  position: relative;
+}
+
+.menu-tabs-content .main-category-heading::before,
+.w-dyn-items .main-category-heading::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #d4a94a;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.menu-tabs-content .main-category-heading:first-of-type,
+.w-dyn-items .main-category-heading:first-of-type {
+  padding-top: 16px !important;
+}
+
+@media (min-width: 992px) {
+  .menu-tabs-content .main-category-heading,
+  .w-dyn-items .main-category-heading {
+    font-size: 14px !important;
+    letter-spacing: 4px;
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-tabs-content .main-category-heading,
+  .w-dyn-items .main-category-heading {
+    padding: 32px 0 8px 0 !important;
+  }
+
+  .menu-tabs-content .main-category-heading:first-of-type,
+  .w-dyn-items .main-category-heading:first-of-type {
+    padding-top: 8px !important;
+  }
+
+  .menu-tabs-content .mandi-subheading,
+  .w-dyn-items .mandi-subheading {
+    padding: 16px 0 12px 0 !important;
+  }
+
+  /* subheading directly after a main heading needs even less top space */
+  .main-category-heading + .mandi-subheading {
+    padding-top: 8px !important;
+  }
+}
+
+</style>
+
+</style>
+
   <style>
     /* Dark theme base */
     .section {
@@ -355,17 +425,15 @@
             <div class="paragraph top-banner-text">EVERYDAY — 12:00 pm TO 11:00 PM</div>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
     <div class="header-wrapper">
       <div class="container w-container">
         <div class="nav-wrapper">
           <nav role="navigation" class="nav-menu w-nav-menu">
             <div class="nav-menu-div"><a href="./index.html" class="nav-link w-nav-link"
-                style="color: rgb(32, 32, 32); max-width: 1400px;">Home</a><a href="" class="nav-link w-nav-link"
-                style="color: rgb(32, 32, 32); max-width: 1400px;">About</a><a href="" aria-current="page"
-                class="nav-link w-nav-link w--current" style="color: rgb(32, 32, 32); max-width: 1400px;">MENU</a><a
-                href="" class="nav-link w-nav-link" style="color: rgb(32, 32, 32); max-width: 1400px;">CONTACT US</a>
+                style="color: rgb(32, 32, 32); max-width: 1400px;">Home</a><a href="" aria-current="page"
+                class="nav-link w-nav-link w--current" style="color: rgb(32, 32, 32); max-width: 1400px;">MENU</a>
             </div>
           </nav><a href="./index.html" class="brand-logo-link w-nav-brand" aria-label="home"><img
               src="./index_files/img/logo.png" loading="lazy" data-w-id="54e843b4-df60-0126-afa1-65fd7245f047"
@@ -723,7 +791,7 @@
           class="h2-heading">Explore our menu</h2>
       </div>
       <div class="menu-search-div" style="margin: 20px 0; text-align: center;">
-        <input type="text" id="menu-search-input" placeholder="Search menu..."
+        <input  data-w-id="6e2ab003-732c-b39c-f79e-e9fa7bf08191" type="text" id="menu-search-input" placeholder="Search menu..."
           style="width: 100%; max-width: 400px; padding: 10px 16px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px;">
       </div>
       <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100"
@@ -951,11 +1019,11 @@
                       <div class="h5-heading">Chicken Mandi</div>
                       <div class="menu-card-price-row">
                         <div class="price-option"><span class="price-label">Qtr</span><span
-                            class="price-value">₹&nbsp;190</span></div>
+                            class="price-value">₹&nbsp;220</span></div>
                         <div class="price-option"><span class="price-label">Half</span><span
-                            class="price-value">₹&nbsp;380</span></div>
+                            class="price-value">₹&nbsp;400</span></div>
                         <div class="price-option"><span class="price-label">Full</span><span
-                            class="price-value">₹&nbsp;720</span></div>
+                            class="price-value">₹&nbsp;770</span></div>
                       </div>
                     </div>
                   </div>
@@ -969,11 +1037,11 @@
                       <div class="h5-heading">Bellari Chicken Mandi</div>
                       <div class="menu-card-price-row">
                         <div class="price-option"><span class="price-label">Qtr</span><span
-                            class="price-value">₹&nbsp;210</span></div>
+                            class="price-value">₹&nbsp;230</span></div>
                         <div class="price-option"><span class="price-label">Half</span><span
-                            class="price-value">₹&nbsp;420</span></div>
+                            class="price-value">₹&nbsp;460</span></div>
                         <div class="price-option"><span class="price-label">Full</span><span
-                            class="price-value">₹&nbsp;800</span></div>
+                            class="price-value">₹&nbsp;840</span></div>
                       </div>
                     </div>
                   </div>
@@ -1110,7 +1178,7 @@
 
                 <div role="listitem" class="menu-collection-item w-dyn-item w-col w-col-4">
                   <div class="menu-card">
-                    <div class="slider-menu-image-div"><img src="./index_files/img/placeholder.png"
+                    <div class="slider-menu-image-div"><img src="./index_files/img/food/honey-mandi.jpeg"
                         class="slider-menu-image" alt="Honey Alfahm+Rice"></div>
                     <div class="menu-card-content">
                       <div class="h5-heading">Honey Alfahm + Rice</div>
@@ -1433,7 +1501,7 @@
 
                         <div class="price-option">
                           <span class="price-label">Full</span>
-                          <span class="price-value">₹&nbsp;680</span>
+                          <span class="price-value">₹&nbsp;640</span>
                         </div>
                       </div>
                     </div>
@@ -1493,7 +1561,7 @@
 
                         <div class="price-option">
                           <span class="price-label">Full</span>
-                          <span class="price-value">₹&nbsp;690</span>
+                          <span class="price-value">₹&nbsp;680</span>
                         </div>
                       </div>
                     </div>
@@ -1708,9 +1776,9 @@
                       <div class="h5-heading">Masala Shawaya</div>
                       <div class="menu-card-price-row">
                         <div class="price-option"><span class="price-label">Half</span><span
-                            class="price-value">₹&nbsp;280</span></div>
+                            class="price-value">₹&nbsp;300</span></div>
                         <div class="price-option"><span class="price-label">Full</span><span
-                            class="price-value">₹&nbsp;560</span></div>
+                            class="price-value">₹&nbsp;600</span></div>
                       </div>
                     </div>
                   </div>
@@ -1742,9 +1810,9 @@
                       <div class="h5-heading">Honey Shawaya</div>
                       <div class="menu-card-price-row">
                         <div class="price-option"><span class="price-label">Half</span><span
-                            class="price-value">₹&nbsp;280</span></div>
+                            class="price-value">₹&nbsp;300</span></div>
                         <div class="price-option"><span class="price-label">Full</span><span
-                            class="price-value">₹&nbsp;560</span></div>
+                            class="price-value">₹&nbsp;600</span></div>
                       </div>
                     </div>
                   </div>
@@ -2822,46 +2890,77 @@
         title="Widget containing a Cloudflare security challenge" tabindex="-1" aria-hidden="true"
         style="border-width: medium; border-style: none; border-color: currentcolor; border-image: none; overflow: hidden; width: 1px; height: 1px; position: fixed; visibility: visible; opacity: 0.01; left: 0px; top: 0px; pointer-events: none; z-index: -1;"></iframe></template>
   </div>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var input = document.getElementById('menu-search-input');
-      if (!input) return;
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var input = document.getElementById('menu-search-input');
+  if (!input) return;
 
-      var allTabLink = document.getElementById('w-tabs-0-data-w-tab-0'); // "All" tab
-      var allPane = document.getElementById('w-tabs-0-data-w-pane-0');   // "All" pane
+  var allTabLink = document.getElementById('w-tabs-0-data-w-tab-0');
+  var allPane = document.getElementById('w-tabs-0-data-w-pane-0');
 
-      input.addEventListener('input', function () {
-        var query = input.value.trim().toLowerCase();
+function updateHeadingsVisibility(query) {
+  if (!allPane) return;
 
-        // If there's a search query and "All" isn't already active, switch to it
-        if (query !== '' && allTabLink && !allTabLink.classList.contains('w--current')) {
-          allTabLink.click();
-        }
+  var mainHeadings = allPane.querySelectorAll('.main-category-heading');
+  var subHeadings = allPane.querySelectorAll('.mandi-subheading');
 
-        if (!allPane) return;
+  if (query === '') {
+    mainHeadings.forEach(function (h) { h.style.removeProperty('display'); });
+    subHeadings.forEach(function (h) { h.style.removeProperty('display'); });
+    return;
+  }
 
-        var items = allPane.querySelectorAll('.menu-collection-item');
-        items.forEach(function (item) {
-          var title = item.querySelector('.h5-heading');
-          var desc = item.querySelector('.menu-paragraph');
-          var text = ((title ? title.textContent : '') + ' ' + (desc ? desc.textContent : '')).toLowerCase();
-          item.style.display = (query === '' || text.indexOf(query) !== -1) ? '' : 'none';
-        });
-      });
+  subHeadings.forEach(function (sub) {
+    var subKey = sub.getAttribute('data-subcat');
+    var items = allPane.querySelectorAll(
+      '.menu-collection-item[data-subcat="' + subKey + '"]'
+    );
+    var hasVisible = Array.prototype.some.call(items, function (i) {
+      return i.style.display !== 'none';
+    });
+    if (hasVisible) {
+      sub.style.removeProperty('display');
+    } else {
+      sub.style.setProperty('display', 'none', 'important');
+    }
+  });
+
+  mainHeadings.forEach(function (main) {
+    var catKey = main.getAttribute('data-cat');
+    var items = allPane.querySelectorAll(
+      '.menu-collection-item[data-cat="' + catKey + '"]'
+    );
+    var hasVisible = Array.prototype.some.call(items, function (i) {
+      return i.style.display !== 'none';
+    });
+    if (hasVisible) {
+      main.style.removeProperty('display');
+    } else {
+      main.style.setProperty('display', 'none', 'important');
+    }
+  });
+}
+  input.addEventListener('input', function () {
+    var query = input.value.trim().toLowerCase();
+
+    if (query !== '' && allTabLink && !allTabLink.classList.contains('w--current')) {
+      allTabLink.click();
+    }
+
+    if (!allPane) return;
+
+    var items = allPane.querySelectorAll('.menu-collection-item');
+    items.forEach(function (item) {
+      var title = item.querySelector('.h5-heading');
+      var desc = item.querySelector('.menu-paragraph');
+      var text = ((title ? title.textContent : '') + ' ' + (desc ? desc.textContent : '')).toLowerCase();
+      item.style.display = (query === '' || text.indexOf(query) !== -1) ? '' : 'none';
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-      var tabLinks = document.querySelectorAll('.menu-tab-link');
-
-      tabLinks.forEach(function (link) {
-        link.addEventListener('touchend', function (e) {
-          e.preventDefault(); // stop the "ghost click" / double-tap delay
-          link.click();       // fire Webflow's normal tab-switch logic immediately
-        }, { passive: false });
-      });
-    });
-  </script>
-
+    updateHeadingsVisibility(query);
+  });
+});
+</script>
 
   <script>
     (function () {
@@ -2950,6 +3049,78 @@
       }, 200);
     }
   </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var allPane = document.getElementById('w-tabs-0-data-w-pane-0');
+  var allList = allPane && allPane.querySelector('.w-dyn-items');
+  if (!allList) return;
+
+  allList.innerHTML = '';
+
+  var categoryPanes = [
+    { id: 'w-tabs-0-data-w-pane-1', label: 'Mandi' },
+    { id: 'w-tabs-0-data-w-pane-5', label: 'Alfahm' },
+    { id: 'w-tabs-0-data-w-pane-2', label: 'Shawarma' },
+    { id: 'w-tabs-0-data-w-pane-3', label: 'Shawaya' },
+    { id: 'w-tabs-0-data-w-pane-6', label: 'Piece' },
+    { id: 'w-tabs-0-data-w-pane-4', label: 'Drinks' }
+  ];
+
+  categoryPanes.forEach(function (cat, catIndex) {
+    var pane = document.getElementById(cat.id);
+    if (!pane) return;
+    var srcList = pane.querySelector('.w-dyn-items');
+    if (!srcList) return;
+
+    // main-category-heading removed — no longer created
+
+    var subIndex = -1;
+
+    Array.prototype.forEach.call(srcList.children, function (node) {
+      var clone = node.cloneNode(true);
+
+      if (clone.classList && clone.classList.contains('mandi-subheading')) {
+        subIndex++;
+        clone.setAttribute('data-cat', catIndex);
+        clone.setAttribute('data-subcat', catIndex + '-' + subIndex);
+      } else {
+        clone.setAttribute('data-cat', catIndex);
+        if (subIndex > -1) {
+          clone.setAttribute('data-subcat', catIndex + '-' + subIndex);
+        }
+      }
+
+      allList.appendChild(clone);
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var wrapper = document.querySelector('.menu-tab-wrapper');
+  if (!wrapper) return;
+  var links = wrapper.querySelectorAll('.menu-tab-link');
+  var panes = wrapper.querySelectorAll('.w-tab-pane');
+
+  function sync() {
+    var active = wrapper.querySelector('.w-tab-pane.w--tab-active');
+    if (!active) return;
+    links.forEach(function (l) {
+      var isCurrent = l.getAttribute('aria-controls') === active.id;
+      if (l.classList.contains('w--current') !== isCurrent) {
+        l.classList.toggle('w--current', isCurrent);
+      }
+    });
+  }
+
+  var mo = new MutationObserver(sync);
+  panes.forEach(function (p) { mo.observe(p, { attributes: true, attributeFilter: ['class'] }); });
+  links.forEach(function (l) { mo.observe(l, { attributes: true, attributeFilter: ['class'] }); });
+  sync();
+});
+</script>
 </body>
 
 </html>
